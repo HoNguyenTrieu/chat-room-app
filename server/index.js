@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+require("dotenv").config()
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 var corsOptions = {
@@ -17,7 +18,7 @@ const http = require('http').createServer(app);
 const mongoose = require('mongoose');
 const socketio = require('socket.io')
 const io = socketio(http);
-const mongoDB = "mongodb+srv://ckmobile:ckmobile123@cluster0.niuuw.mongodb.net/chat-database?retryWrites=true&w=majority";
+const mongoDB = process.env.MONGODB_URL
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => console.log('connected')).catch(err => console.log(err))
 const { addUser, getUser, removeUser } = require('./helper');
 const Message = require('./models/Message');
